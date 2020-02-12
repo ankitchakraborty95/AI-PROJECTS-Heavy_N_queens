@@ -1,17 +1,6 @@
 import random
-###########Generates Random Board (Takes a number)################
-def generate_queenboard(n):
-  a = [[ 0 for i in range(n)]for j in range(n)]
-  random.seed(2)
-  for i in range(0,n):
-    a[random.randrange(0,n-1)][i] = random.randrange(1,9)
-  return a# returns an 2D array
-######################################3
+import numpy
 
-#######Prints the board takes 2d array as input#################
-def print_board(board):
-  for x in board:
-    print(x)
 
 #########Finds number or attacking queens (inputs board and returns array of attacking queens weights)
 def find_no_of_attacking_queens(board):
@@ -31,12 +20,14 @@ def find_no_of_attacking_queens(board):
         #print("col1",coloumn)
         while(coloumn<n):
           if(board[row][coloumn]>0):
+            #print("update",row,coloumn)
+            #print("board before appending 1",attack_queens)
+            #print("appending",board[x][y],board[row][coloumn])
             attack_queens.append([board[x][y],board[row][coloumn]])
-            #print(board[x][y],board[row][coloumn])
+            #print("board after appending 1",attack_queens)
           coloumn = coloumn+1
-          #print("update col",coloumn)
+          #print("update",row,coloumn)
         #print("board after first right pass",attack_queens)
-        #finding queens on upper diagonal
         if(x!=0):
           row = x-1
           #print("row2",row)
@@ -44,7 +35,9 @@ def find_no_of_attacking_queens(board):
           #print("col2",coloumn)
           while(0<row<n and coloumn<n):
             if(board[row][coloumn]>0):
+              #print("board before appending 2",attack_queens)
               attack_queens.append([board[x][y],board[row][coloumn]])
+              #print("board after appending 2",attack_queens)
             row = row-1
             coloumn = coloumn+1
         #print("board after second right pass",attack_queens)
@@ -55,18 +48,21 @@ def find_no_of_attacking_queens(board):
         #print("row3",coloumn)
         while(row<n and coloumn<n):
           if(board[row][coloumn]>0):
+            #print("board before appending 3",attack_queens)
             attack_queens.append([board[x][y],board[row][coloumn]])
+            #print("board after appending 3",attack_queens)
           row = row+1
           #print("updated row",row)
-          #coloumn = coloumn+1
+          coloumn = coloumn+1
           #print("updated col",coloumn)
         #print("board after third right pass",attack_queens)
+        
   return attack_queens
 ##################################################
 
 ##########Calculates the move cost###########
-def move_cost(weight,dist):
-  return(weight*dist)
+def move_cost(weight,dist, curr_cost):
+  return((weight*weight*dist)+curr_cost)
 ####################################
 
 ############Takes a board and moves the queen at current position(row,col) to desired position (row,col)
@@ -77,6 +73,16 @@ def move_queen(board,curr_row,curr_col,des_row,des_col):
 
 #########################################################3
 
-a =(generate_queenboard(6))
-print_board(a)
-print(find_no_of_attacking_queens(a))
+#####Calculate heuristic based on input##############
+####takes input 1 or 2 and list_pf_attacking_pairs########
+def calc_h(number,list_attacking_queens):
+  if(number==1):###3calc h1 min of attacking pairs
+    return(numpy.min(list_attacking_queens))
+  elif(number==2):###3calc h2 sum of min of attacking pairs
+    sum =0
+    for x in list_attacking_queens:
+      sum = sum + min(x)
+    return(sum)
+  else:######if invalid input exit the loop
+    print("invalid input of heuristic")
+    return 0;
