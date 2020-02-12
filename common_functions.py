@@ -69,7 +69,7 @@ def move_cost(weight,dist, curr_cost):
 def move_queen(board,curr_row,curr_col,des_row,des_col):
   board[des_row][des_col]=board[curr_row][curr_col]
   board[curr_row][curr_col] = 0
-  return board;
+  return board
 
 #########################################################3
 
@@ -85,4 +85,4 @@ def calc_h(number,list_attacking_queens):
     return(sum)
   else:######if invalid input exit the loop
     print("invalid input of heuristic")
-    return 0;
+    return 0

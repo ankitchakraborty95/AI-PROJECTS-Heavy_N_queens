@@ -8,8 +8,10 @@ class node():
     self.weight = 0
   def print_node(self):
     print("row",self.row)
-    print("col",self.coloumn)
+    print("col",self.col)
     print("weight",self.weight)
+
+
 class board(node):
   def __init__(self,n):
     self.board = [[node() for j in range(n)] for i in range(n)]
@@ -21,6 +23,8 @@ class board(node):
         y.col =j
         j=j+1
       i=i+1
+      j=0
+
     random.seed(100)
     for x in range(n):
       (self.board[random.randrange(0,n)][x]).weight = random.randrange(1,10)
