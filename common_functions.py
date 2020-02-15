@@ -1,6 +1,7 @@
 import random
 import numpy
-
+import csv
+import chardet
 
 #########Finds number or attacking queens (inputs board and returns array of attacking queens weights)
 def find_no_of_attacking_queens(board):
@@ -86,3 +87,23 @@ def calc_h(number,list_attacking_queens):
   else:######if invalid input exit the loop
     print("invalid input of heuristic")
     return 0
+
+def read_board(filename):
+  rows = []
+  board = []
+  i=0
+  # Read the CSV file
+  with open(filename, 'r', encoding='utf-8-sig') as csvfile:
+    csvreader = csv.reader(csvfile)
+    for row in csvreader:
+      rows.append(row)
+
+  for row in rows:
+    board.append([])
+    for col in row:
+      if col != '':
+        board[i].append(int(col))
+      else:
+        board[i].append(0)
+    i += 1
+  return board

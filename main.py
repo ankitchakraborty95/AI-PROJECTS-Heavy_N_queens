@@ -1,11 +1,48 @@
 from random_board_generator_function import generate_queenboard
 from random_board_generator_function import print_board
-from common_functions import find_no_of_attacking_queens
-from common_functions import calc_h
+from common_functions import *
+import csv
+import sys
 
+def rand_n_queens(alg, heuristic):
+    random.seed(random.random())
+    board = (generate_queenboard(random.randrange(3, 100)))
+    print_board(board)
+    k = find_no_of_attacking_queens(board)
+    h = calc_h(heuristic, k)
+    print(h)
+    pass
 
-a =(generate_queenboard(7))
-print_board(a)
-k = find_no_of_attacking_queens(a)
-h = calc_h(1,k)
-print(h)
+def num_n_queens(num, alg, heuristic):
+    board = (generate_queenboard(num))
+    print_board(board)
+    k = find_no_of_attacking_queens(board)
+    h = calc_h(heuristic, k)
+    print(h)
+    pass
+
+def n_queens(fname, alg, heuristic):
+    board = read_board(fname)
+    for x in board:
+        print(x)
+    k = find_no_of_attacking_queens(board)
+    h = calc_h(heuristic, k)
+    print(k)
+
+def is_intstring (s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        rand_n_queens(sys.argv[1], sys.argv[2])
+    elif len(sys.argv) == 4 and is_intstring(sys.argv[1]):
+        num_n_queens(int(sys.argv[1]), sys.argv[2], sys.argv[3])
+    elif len(sys.argv) == 4 and ~is_intstring(sys.argv[1]):
+        n_queens(sys.argv[1], sys.argv[2], sys.argv[3])
+    else:
+        print("Ya got nothing")
+
