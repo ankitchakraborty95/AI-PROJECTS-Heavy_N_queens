@@ -4,6 +4,7 @@ from common_functions import *
 import csv
 import sys
 
+# Generates a board with a random size
 def rand_n_queens(alg, heuristic):
     random.seed(random.random())
     board = (generate_queenboard(random.randrange(5, 100)))
@@ -13,6 +14,7 @@ def rand_n_queens(alg, heuristic):
     print(h)
     pass
 
+# Generates a board with a specified size
 def num_n_queens(num, alg, heuristic):
     board = (generate_queenboard(num))
     print_board(board)
@@ -21,6 +23,7 @@ def num_n_queens(num, alg, heuristic):
     print(h)
     pass
 
+# Uses a given csv file
 def n_queens(fname, alg, heuristic):
     board = read_board(fname)
     for x in board:
