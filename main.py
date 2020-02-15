@@ -10,7 +10,7 @@ def rand_n_queens(alg, heuristic):
     board = (generate_queenboard(random.randrange(5, 100)))
     print_board(board)
     k = find_no_of_attacking_queens(board)
-    h = calc_h(heuristic, k)
+    h = calc_h(int(heuristic), k)
     print(h)
     pass
 
@@ -19,7 +19,7 @@ def num_n_queens(num, alg, heuristic):
     board = (generate_queenboard(num))
     print_board(board)
     k = find_no_of_attacking_queens(board)
-    h = calc_h(heuristic, k)
+    h = calc_h(int(heuristic), k)
     print(h)
     pass
 
@@ -29,7 +29,7 @@ def n_queens(fname, alg, heuristic):
     for x in board:
         print(x)
     k = find_no_of_attacking_queens(board)
-    h = calc_h(heuristic, k)
+    h = calc_h(int(heuristic), k)
     print(k)
 
 def is_intstring (s):
