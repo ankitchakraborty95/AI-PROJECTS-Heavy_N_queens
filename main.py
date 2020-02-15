@@ -6,7 +6,7 @@ import sys
 
 def rand_n_queens(alg, heuristic):
     random.seed(random.random())
-    board = (generate_queenboard(random.randrange(3, 100)))
+    board = (generate_queenboard(random.randrange(5, 100)))
     print_board(board)
     k = find_no_of_attacking_queens(board)
     h = calc_h(heuristic, k)
