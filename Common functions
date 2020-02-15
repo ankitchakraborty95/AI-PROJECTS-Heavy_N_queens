@@ -58,7 +58,7 @@ def find_no_of_attacking_queens(board):
             attack_queens.append([board[x][y],board[row][coloumn]])
           row = row+1
           #print("updated row",row)
-          #coloumn = coloumn+1
+          coloumn = coloumn+1
           #print("updated col",coloumn)
         #print("board after third right pass",attack_queens)
   return attack_queens
