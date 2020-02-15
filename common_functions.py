@@ -1,5 +1,8 @@
 import random
 import numpy
+import csv
+import chardet
+
 #########Finds number or attacking queens (inputs board and returns array of attacking queens weights)
 def find_no_of_attacking_queens(board):
     n = len(board)
@@ -71,20 +74,34 @@ def move_queen(board, curr_row, curr_col, des_row, des_col):
 
 #####Calculate heuristic based on input##############
 ####takes input 1 or 2 and list_pf_attacking_pairs########
-def calc_h(number, list_attacking_queens):
-    if (number == 1): ###3calc h1 min of attacking pairs
-        if(len(list_attacking_queens)==0):
-            return 0
-        value = min(min(list_attacking_queens))
-        return (value**2)
-    elif (number == 2):  ###3calc h2 sum of min of attacking pairs
-        if (len(list_attacking_queens) == 0):
-            return 0
-        sum = 0
-        for x in list_attacking_queens:
-            sum = sum + min(x)
-        return (sum)
-    else:  ######if invalid input exit the loop
-        print("invalid input of heuristic")
-        return 0
-################################################################################
+def calc_h(number,list_attacking_queens):
+  if(number==1):###3calc h1 min of attacking pairs
+    return(numpy.min(list_attacking_queens))
+  elif(number==2):###3calc h2 sum of min of attacking pairs
+    sum =0
+    for x in list_attacking_queens:
+      sum = sum + min(x)
+    return(sum)
+  else:######if invalid input exit the loop
+    print("invalid input of heuristic")
+    return 0
+
+def read_board(filename):
+  rows = []
+  board = []
+  i=0
+  # Read the CSV file
+  with open(filename, 'r', encoding='utf-8-sig') as csvfile:
+    csvreader = csv.reader(csvfile)
+    for row in csvreader:
+      rows.append(row)
+
+  for row in rows:
+    board.append([])
+    for col in row:
+      if col != '':
+        board[i].append(int(col))
+      else:
+        board[i].append(0)
+    i += 1
+  return board
