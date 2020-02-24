@@ -16,7 +16,7 @@ class Queen:
         Cost is 0 if queens do not collide
         """
         if self.x == queen.x or self.y == queen.y or ((self.x + self.y) == (queen.x + queen.y)) or (abs(self.x - self.y) == abs(queen.x - queen.y)):
-            return min(self.weight, queen.weight)
+            return min(self.weight, queen.weight)**2
         return 0
 
 class Node:
@@ -67,7 +67,7 @@ class Node:
                 queen.x += 1
                 queen.x %= self.n
                 state[i] = queen
-                cost_from_root = self.cost_from_root + queen.weight * abs(self.state[i].x - queen.x)
+                cost_from_root = self.cost_from_root + queen.weight*queen.weight * abs(self.state[i].x - queen.x)
                 neighbours.append(Node(copy.deepcopy(state), cost_from_root, self.heuristic, self.level + 1))
                 neighbours[-1].path = self.path + [self]
         return neighbours
