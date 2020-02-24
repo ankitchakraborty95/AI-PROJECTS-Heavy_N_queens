@@ -14,8 +14,9 @@ def rand_n_queens(alg, heuristic):
     h = calc_h(int(heuristic), k)
     print("attcking pair in input board", k)
     print("input board Heuristic",h)
-    if alg == 'HC':
-         hc_restart(board,int(heuristic))
+    if alg == '2'or alg == 'HC':
+        print("doing HC")
+        hc_restart(board,int(heuristic))
     pass
 
 # Generates a board with a specified size
@@ -30,7 +31,7 @@ def num_n_queens(num, alg, heuristic):
     h = calc_h(int(heuristic), k)
     print("attcking pair in input board",k)
     print("input board Heuristic", h)
-    if alg == 'HC':
+    if alg == '2'or alg == 'HC':
         print("doing HC")
         hc_restart(board,int(heuristic))
     pass
@@ -46,7 +47,8 @@ def n_queens(fname, alg, heuristic):
     h = calc_h(int(heuristic),k)
     print("attcking pair in input board",k)
     print("input board Heuristic", h)
-    if alg == 'HC':
+    if alg == '2' or alg == 'HC':
+        print("doing HC")
         hc_restart(board,int(heuristic))
 
 
@@ -58,6 +60,8 @@ def is_intstring (s):
         return False
 
 if __name__ == "__main__":
+    print("<Input path/Num of queens/Leave blank for random board> ; "
+          "<1 for A* 2 for HC with restart >; <1 for H1/2 for H2>")
     if len(sys.argv) == 3:
         rand_n_queens(sys.argv[1], sys.argv[2])
     elif len(sys.argv) == 4 and is_intstring(sys.argv[1]):
