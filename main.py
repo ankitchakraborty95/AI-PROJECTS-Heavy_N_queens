@@ -17,6 +17,9 @@ def rand_n_queens(alg, heuristic):
     if alg == '2'or alg == 'HC':
         print("doing HC")
         hc_restart(board,int(heuristic))
+    if alg == '1'or alg == 'A*':
+        print('doing A*')
+        aStar_call(board, int(heuristic))
     pass
 
 # Generates a board with a specified size
@@ -34,6 +37,9 @@ def num_n_queens(num, alg, heuristic):
     if alg == '2'or alg == 'HC':
         print("doing HC")
         hc_restart(board,int(heuristic))
+    if alg == '1'or alg == 'A*':
+        print('doing A*')
+        aStar_call(board, int(heuristic))
     pass
 
 # Uses a given csv file
@@ -50,6 +56,9 @@ def n_queens(fname, alg, heuristic):
     if alg == '2' or alg == 'HC':
         print("doing HC")
         hc_restart(board,int(heuristic))
+    if alg == '1'or alg == 'A*':
+        print('doing A*')
+        aStar_call(board, int(heuristic))
 
 
 def is_intstring (s):
