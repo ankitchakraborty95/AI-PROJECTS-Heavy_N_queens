@@ -1,9 +1,16 @@
 import random
 import numpy
 import csv
-import chardet
 
 #########Finds number or attacking queens (inputs board and returns array of attacking queens weights)
+def generate_queenboard(n):
+  a = [[ 0 for i in range(n)]for j in range(n)]
+  random.seed(random.random())
+  for i in range(0,n):
+    a[random.randrange(0,n-1)][i] = random.randint(1,9)
+  return a
+
+
 def find_no_of_attacking_queens(board):
     n = len(board)
     # print("Length",n)
@@ -67,7 +74,7 @@ def move_queen(board, curr_row, curr_col, des_row, des_col):
             copy_board[x][y]=board[x][y]
     copy_board[des_row][des_col] = board[curr_row][curr_col]
     copy_board[curr_row][curr_col] = 0
-    return copy_board;
+    return copy_board
 
 
 #########################################################3
@@ -76,8 +83,14 @@ def move_queen(board, curr_row, curr_col, des_row, des_col):
 ####takes input 1 or 2 and list_pf_attacking_pairs########
 def calc_h(number,list_attacking_queens):
   if(number==1):###3calc h1 min of attacking pairs
-    return(numpy.min(list_attacking_queens))
+      if(len(list_attacking_queens)==0):
+          return 0
+      else:
+          value = min(min(list_attacking_queens))
+          return (value**2)
   elif(number==2):###3calc h2 sum of min of attacking pairs
+    if (len(list_attacking_queens) == 0):
+        return 0
     sum =0
     for x in list_attacking_queens:
       sum = sum + min(x)
