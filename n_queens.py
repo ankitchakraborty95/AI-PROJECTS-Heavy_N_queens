@@ -7,7 +7,6 @@ import sys
 def rand_n_queens(alg, heuristic):
     print("alg selected",alg)
     print("heuristic selected",heuristic)
-    random.seed(random.random())
     board = (generate_queenboard(random.randrange(5,15)))
     print("start state")
     print_board(board)
