@@ -1,5 +1,6 @@
 from common_functions import *
 from hc_with_restart import hc_restart
+from aStar_call import *
 import sys
 
 # Generates a board with a random size
@@ -69,13 +70,26 @@ def is_intstring (s):
         return False
 
 if __name__ == "__main__":
-    print("<Input path/Num of queens/Leave blank for random board> ; "
-          "<1 for A* 2 for HC with restart >; <1 for H1/2 for H2>")
     if len(sys.argv) == 3:
-        rand_n_queens(sys.argv[1], sys.argv[2])
+        heuristic = 0
+        if(sys.argv[2] == 'H1'):
+            heuristic = 1
+        if(sys.argv[2] == 'H2'):
+            heuristic = 2
+        rand_n_queens(sys.argv[1], heuristic)
     elif len(sys.argv) == 4 and is_intstring(sys.argv[1]):
-        num_n_queens(int(sys.argv[1]), sys.argv[2], sys.argv[3])
+        heuristic = 0
+        if (sys.argv[3] == 'H1'):
+            heuristic = 1
+        if (sys.argv[3] == 'H2'):
+            heuristic = 2
+        num_n_queens(int(sys.argv[1]), sys.argv[2], heuristic)
     elif len(sys.argv) == 4 and is_intstring(sys.argv[1])!= True:
-        n_queens(sys.argv[1], sys.argv[2], sys.argv[3])
+        heuristic = 0
+        if (sys.argv[3] == 'H1'):
+            heuristic = 1
+        if (sys.argv[3] == 'H2'):
+            heuristic = 2
+        n_queens(sys.argv[1], sys.argv[2], heuristic)
     else:
         print("Ya got nothing")
